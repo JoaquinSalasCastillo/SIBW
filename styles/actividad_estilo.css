@@ -1,0 +1,146 @@
+/*** ESTILO DE LA CABECERA ***/
+header{
+    display: flex;
+    align-items: center;
+}
+
+#logo{
+    width: 100px;
+    height: 100px;
+}
+
+header > div{
+    flex-grow: 1;
+}
+
+/*** ESTILO DEL CUERPO DEL DOCUMENTO ***/
+.flex-container{
+    display: flex;
+}
+
+/*Estilo lateral izquierdo (zona auxiliar)*/
+#lateral{
+    flex-basis: 20%;
+}
+#lateral h2{
+    text-align: center;
+}
+
+/*Estilo central (Descripcion Actividad)*/
+#principal{
+    flex-basis: 100%;
+}
+
+#principal h1{
+    text-align: center;
+}
+
+#descripcion{
+    flex-basis: 70%;
+}
+
+.redes-sociales{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*Estilo lateral derecho (Imagenes)*/
+.grid-container{
+    display: grid;
+    flex-basis: 30%;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.grid-item{
+    text-align: center;
+}   
+
+.grid-item img{
+    width: 100%;
+}
+
+/*** ESTILO DEL PIE DE PAGINA ***/
+footer{
+    text-align: center;
+}
+
+/*** ESTILO DE LA CAJA DE COMENTARIOS ***/
+#seccion-comentarios{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 20%;
+    z-index: 1000;
+    background-color: #d0e8f2;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#comentarios-subidos{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+#comentarios-subidos > h2{
+    text-align: center;
+}
+
+#formulario-comentarios{
+    order: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.comentario{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    background-color: bisque;
+}
+
+.oculto{
+    visibility: hidden;
+}
+.visible{
+    visibility: visible;
+}
+
+#boton-comentarios{
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    z-index: 1001;
+}
+
+/*** ESTILOS GENERALES ***/
+.caja {
+    border: 3px solid black;
+    background-color: #fff4e6;
+    color: #333;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    background-color: #c7d3e3;
+}
+
+/*** MEDIA QUERYS ***/
+@media screen and (max-width: 650px) {
+    .flex-container{
+        display: block;
+    }
+}

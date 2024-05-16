@@ -1,0 +1,111 @@
+{% extends "base.twig" %}
+{% block titulo %}
+Actividad
+{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="styles/actividad_estilo.css">
+{% endblock %}
+
+{% block central %}
+    <!-- Informacion principal de la actividad con fecha, precios, descripcion e imagenes -->
+    <article id="principal" class="caja flex-container">
+        <div id="descripcion">
+            <!-- Titulo actividad -->
+            <h1>{{ actividad['nombre'] }}</h1>
+
+            <!-- Precio y fecha -->
+            <p><strong>Fecha:</strong> {{ actividad['fecha'] }}</p>
+            <p><strong>Precio:</strong> {{ actividad['precio'] }}€  </p>
+
+            <!-- Breve descripcion -->
+            <h3>Descripcion de la Actividad</h3>
+            <p>{{ actividad['descripcion'] }}</p>
+
+            <!-- Material -->
+            <h3>Material necesario:</h3>
+            <ul>
+                {% for material in actividad['material_necesario'] %}
+                    <li>{{ material }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Enlaces relacionados con la actividad -->
+            <h3>Informacion relacionada</h3>
+            <nav>
+                <ul>
+                    {% for enlace in actividad['informacion_relacionada'] %}
+                        <li><a href="#">{{ enlace }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            
+            <!-- Redes sociales y enlace para imprimir -->
+            <div class="border redes-sociales">
+                <a href="#" class="caja">FB</a>
+                <a href="#" class="caja">TW</a>
+                <a href="actividad_imprimir.php?id={{ idAc }}" class="caja">Imprimir</a>
+            </div>
+        </div>
+        <!-- Grid con imagenes de la actividad -->
+        <div class="grid-container">
+            {% for imagen in imagenes %}
+                <figure class="grid-item">
+                    <img src="img/{{ imagen['ruta'] }}" alt="{{ actividad['nombre'] }}">
+                    <figcaption>{{ actividad['nombre'] }}</figcaption>
+                </figure>
+            {% endfor %}
+        </div>
+    </article>
+{% endblock %}
+
+{% block comentarios %}
+    <!-- Seccion de comentarios -->
+    <div id="seccion-comentarios" class="oculto">
+        <div id="comentarios-subidos">
+            <h2>COMENTARIOS</h2>
+
+            <!-- Comentarios sacados de la base de datos -->
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <h4>{{ comentario['nombre'] }}</h4>
+                    <p><strong>Email:</strong> {{ comentario['email'] }}</p>
+                    <p><strong>Fecha y hora:</strong> {{ comentario['fecha_hora'] }}</p>
+                    <p>{{ comentario['comentario'] }}</p>
+                    {% if usuarioData.usuario.rol == 'moderador' or usuarioData.usuario.rol == 'superusuario' %}
+                        <a href="editar_comentario.php?id={{ comentario['id'] }}">Editar</a>
+                        <a href="borrar_comentario.php?id={{ comentario['id'] }}">Borrar</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Formulario para añadir comentarios -->
+        <form id="formulario-comentarios">
+            <div class="form-group">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" class="form-control">
+            </div>
+        
+            <div class="form-group">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" class="form-control" placeholder="name@example.com">
+            </div>
+        
+            <label for="comentario" class="form-label">Comentario</label>
+            <textarea id="comentario" class="form-control"></textarea>
+        
+            <input type="submit" value="Enviar" class="btn btn-success">
+        </form>
+    </div>
+    <!-- Boton para hacer aparecer la seccion de comentarios -->
+    <button type="button" id="boton-comentarios" class="btn btn-primary">Comentarios</button>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var palabrasProhibidas = {{ palabrasProhibidas|json_encode|raw }};
+    </script>
+    <script src="scripts/formulario.js"></script>
+{% endblock %}

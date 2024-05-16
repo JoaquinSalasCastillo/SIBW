@@ -1,0 +1,75 @@
+/*** ESTILO DE LA CABECERA ***/
+header{
+    display: flex;
+    align-items: center;
+}
+
+#logo{
+    width: 100px;
+    height: 100px;
+}
+
+header div{
+    flex-grow: 1;
+}
+
+/*** ESTILO DEL CUERPO PRINCIPAL ***/
+.flex-container{
+    display: flex;
+}
+
+/*Estilo lateral (zona auxiliar)*/
+#lateral{
+    flex-basis: 20%;
+}
+#lateral h2{
+    text-align: center;
+}
+
+/*Estilo central (actividades)*/
+#principal{
+    display: grid;
+    flex-basis: 100%;
+    grid-template-columns: repeat(3, 1fr); 
+}
+
+.grid-item {
+    text-align: center;
+    background-color: white;
+}
+.grid-item img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/*** ESTILO DEL PIE DE PAGINA ***/
+footer{
+    text-align: center;
+}
+
+/*** ESTILOS GENERALES ***/
+.caja {
+    border: 3px solid black;
+    background-color: #fff4e6;
+    color: #333;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    background-color: #c7d3e3;
+}
+
+/*** MEDIAS QUERYS ***/
+@media screen and (max-width: 540px) {
+    .flex-container{
+        display: block;
+    }
+}

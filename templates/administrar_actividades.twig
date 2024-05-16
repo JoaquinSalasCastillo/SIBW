@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administrar Actividades</title>
+    <style>
+        .actividades {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .actividad {
+            flex-basis: calc(100% / 3 - 20px); /* Ajusta este valor para controlar cuántas actividades se muestran por fila */
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #grid-imagenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Ajusta 100px para controlar el tamaño mínimo de las imágenes */
+            grid-gap: 10px; /* Ajusta para controlar el espacio entre las imágenes */
+        }
+    </style>
+</head>
+<body>
+    <h1>Administrar Actividades</h1>
+
+    <a href="add_actividad.php"><button type="button">Añadir nueva actividad</button></a>
+
+    <div class="actividades">
+        {% for actividad in actividades %}
+            <div class="actividad">
+                <h2>{{ actividad.nombre }}</h2>
+                <p>{{ actividad.fecha }}</p>
+                <p>{{ actividad.precio }}</p>
+                <p>{{ actividad.descripcion }}</p>
+                <p>{{ actividad.material_necesario }}</p>
+                <p>{{ actividad.informacion_relacionada }}</p>
+                <img src="img/{{ actividad.imagen }}" alt="Actividad: {{ actividad.nombre }}">
+                {# <div id="grid-imagenes">
+                    {% for imagen in imagenes %}
+                        {% if imagen.actividad_id == actividad.id %}
+                            <img src="img/{{ imagen.ruta }}" alt="Actividad: {{ actividad.nombre }}">
+                        {% endif %}
+                    {% endfor %}
+                </div> #}
+                <div class="acciones">
+                    <a href="editar_actividad.php?id={{ actividad.id }}"><button type="button">Editar</button></a>
+                    <a href="borrar_actividad.php?id={{ actividad.id }}"><button type="button">Borrar</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

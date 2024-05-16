@@ -1,0 +1,13 @@
+/******************* ESTILO DE SESION *******************/
+#sesiones {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#sesiones p {
+    margin: 0;
+    margin-right: auto;
+}

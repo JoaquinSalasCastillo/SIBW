@@ -1,0 +1,35 @@
+/*** ELEMENTOS OCULTADOS ***/
+header nav{
+    display: none;
+}
+footer{
+    display: none;
+}
+aside{
+    display: none;
+}
+.redes-sociales{
+    display: none;
+}
+
+/*** ELEMENTOS MODIFICADOS ***/
+#principal{
+    flex-basis: 100%;
+}
+
+#logo{
+    order: 2;
+}
+
+.caja{
+    background-color: white;
+}
+
+body{
+    background-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+img{
+    filter: grayscale(100%);
+}

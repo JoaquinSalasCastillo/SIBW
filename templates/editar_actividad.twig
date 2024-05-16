@@ -1,0 +1,53 @@
+<head>
+    <title>Editar Actividad</title>
+    <style>
+        form div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Actividad</h1>
+
+    <form action="editar_actividad.php" method="post">
+        <input type="hidden" name="id" value="{{ actividad.id }}">
+
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ actividad.nombre }}">
+        </div>
+
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="fecha" value="{{ actividad.fecha }}">
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" value="{{ actividad.precio }}">
+        </div>
+
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion">{{ actividad.descripcion }}</textarea>
+        </div>
+
+        <div>
+            <label for="material_necesario">Material Necesario:</label>
+            <textarea id="material_necesario" name="material_necesario">{{ actividad.material_necesario|join(',') }}</textarea>
+        </div>
+
+        <div>
+            <label for="informacion_relacionada">Información Relacionada:</label>
+            <textarea id="informacion_relacionada" name="informacion_relacionada">{{ actividad.informacion_relacionada|join(',') }}</textarea>
+        </div>
+
+        <div>
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen">
+        </div>
+
+        <input type="submit" value="Guardar cambios">
+    </form>
+</body>
+</html>

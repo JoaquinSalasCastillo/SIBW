@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+{% block titulo %}
+Actividades de Montaña
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="styles/portada_estilo.css">
+{% endblock %}
+
+{% block central %}
+    <!-- Zona principal con las actividades que enlazan a su respectiva pagina -->
+    <article id="principal" class="caja">
+        {% for actividad in actividades %}
+            <a href="actividad.php?id={{ actividad.id }}">
+                <div class="grid-item caja">
+                    <img src="img/{{ actividad.imagen }}" alt="Actividad: {{ actividad.nombre }}">
+                    <p>{{ actividad.nombre }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </article>
+{% endblock %}
