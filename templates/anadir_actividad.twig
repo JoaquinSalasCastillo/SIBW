@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Añadir Actividad</title>
+</head>
+<body>
+    <form action="anadir_actividad.php" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="fecha">
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio">
+        </div>
+
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion"></textarea>
+        </div>
+
+        <div>
+            <label for="material_necesario">Material Necesario:</label>
+            <textarea id="material_necesario" name="material_necesario"></textarea>
+        </div>
+
+        <div>
+            <label for="informacion_relacionada">Información Relacionada:</label>
+            <textarea id="informacion_relacionada" name="informacion_relacionada"></textarea>
+        </div>
+
+        <div>
+            <label for="imagen_portada">Imagen de Portada:</label>
+            <input type="file" id="imagen_portada" name="imagen_portada">
+        </div>
+
+        <div>
+            <label for="imagen_contenido1">Imagen de Contenido 1:</label>
+            <input type="file" id="imagen_contenido1" name="imagen_contenido1">
+        </div>
+
+        <div>
+            <label for="imagen_contenido2">Imagen de Contenido 2:</label>
+            <input type="file" id="imagen_contenido2" name="imagen_contenido2">
+        </div>
+
+        <input type="submit" value="Añadir actividad">
+    </form>
+</body>
+</html>

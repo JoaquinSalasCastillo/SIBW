@@ -78,20 +78,31 @@
 
             return $actividades;
         }
-        public function addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen) {
+        public function addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen, $imagenes_contenido) {
             $stmt = $this->mysqli->prepare(
                 "INSERT INTO actividades (
                         nombre, 
                         fecha, 
                         precio, 
                         descripcion, 
-                        material_necesario
+                        material_necesario,
                         informacion_relacionada,
                         imagen)
                 VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
             $stmt->bind_param("ssissss", $nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen);
             $stmt->execute();
+
+            if($stmt->error) {
+                echo "Error al insertar actividad: " . $stmt->error; 
+            }
+            else {
+                $actividad_id = $this->mysqli->insert_id;
+
+                foreach($imagenes_contenido as $ruta_imagen) {
+                    $this->addImagen($actividad_id, $ruta_imagen);
+                }
+            }
         }
         public function updateActividad($actividad) {
             $stmt = $this->mysqli->prepare(
@@ -179,6 +190,13 @@
                 array_push($imagenes, $imagen);
             }
             return $imagenes;
+        }
+        public function addImagen($actividad_id, $ruta) {
+            $stmt = $this->mysqli->prepare(
+                "INSERT INTO imagenes (actividad_id, ruta) VALUES (?, ?)"
+            );
+            $stmt->bind_param("is", $actividad_id, $ruta);
+            $stmt->execute();
         }
     
 
