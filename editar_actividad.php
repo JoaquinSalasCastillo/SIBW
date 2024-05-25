@@ -8,11 +8,11 @@
 
   $bd = new Database();
   
-  // Obtener la actividad
-  $id = $_GET['id'];
-  $actividad = $bd->getActividad($id);
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $actividad = $bd->getActividad($id);
+
     $actividad['nombre'] = $_POST['nombre'];
     $actividad['fecha'] = $_POST['fecha'];
     $actividad['precio'] = $_POST['precio'];
@@ -25,12 +25,16 @@
     header("Location: administrar_actividades.php");
     exit;
   }
-
-  echo $twig->render(
-    'editar_actividad.twig', 
-    [
-      'actividad' => $actividad
-    ]
-  );
+  else {
+    $id = $_GET['id'];
+    $actividad = $bd->getActividad($id);
+  
+    echo $twig->render(
+      'editar_actividad.twig', 
+      [
+        'actividad' => $actividad
+      ]
+    );
+  }
 
 ?>

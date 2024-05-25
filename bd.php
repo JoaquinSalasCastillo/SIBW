@@ -137,6 +137,9 @@
                 $actividad['id']
             );
             $stmt->execute();
+            if(!$stmt->execute()) {
+                echo "Error al actualizar actividad: " . $stmt->error;
+            }
         }
         public function deleteActividad($idAc) {
             // Borrar imagenes asociadas a la actividad
@@ -176,6 +179,21 @@
             $stmt->bind_param("i", $idAc);
             $stmt->execute();
         }
+
+        public function buscarActividades($query, $esGestor = false) {
+            $sql = "SELECT id, nombre FROM actividades WHERE nombre LIKE ?";
+            if (!$esGestor) {
+                $sql .= " AND publicado = 1";
+            }
+            $stmt = $this->mysqli->prepare($sql);
+            $searchTerm = "%" . $query . "%";
+            $stmt->bind_param("s", $searchTerm);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            return $res->fetch_all(MYSQLI_ASSOC);
+        }
+
+        /******************** IMAGENES **********************/
         public function getImagenes($idAc) {
             // Preparar la sentencia
             $stmt = $this->mysqli->prepare(
@@ -453,6 +471,11 @@
             }
         
             return $palabrasProhibidas;
+        }
+
+        /******************** CERRAR CONEXION BASE DE DATOS **********************/
+        public function __destruct() {
+            $this->mysqli->close();
         }
     }
 

@@ -11,6 +11,10 @@
     {% endblock %}
 </head>
 <body>
+    <!-- Barra de busqueda de actividades -->
+    <input type="text" id="busqueda" placeholder="Buscar actividad...">
+    <div id="resultados"></div>
+
     <!-- Botones de inicio de sesion -->
     <div id="sesiones">
         {% if usuarioData.loggedIn %}
@@ -81,6 +85,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="scripts/busqueda.js"></script>
     {% block scripts %}
     {% endblock %}
 </body>
