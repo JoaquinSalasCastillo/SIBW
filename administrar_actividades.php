@@ -8,7 +8,7 @@
 
   $bd = new Database();
 
-  $actividades = $bd->getAllActividades();
+  $actividades = $bd->getAllActividades(false);
   $imagenes = $bd->getAllImagenes();
 
   echo $twig->render(

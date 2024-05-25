@@ -21,7 +21,7 @@
                         informacion_relacionada, 
                         imagen
                 FROM actividades 
-                WHERE id = ?"
+                WHERE id = ? AND publicado = 1"
             );
             // Vincular los parametros
             $stmt->bind_param("i", $idAc);
@@ -54,10 +54,18 @@
     
             return $actividad;
         }
-        public function getAllActividades() {
-            $stmt = $this->mysqli->prepare(
-                "SELECT * FROM actividades"
-            );
+        public function getAllActividades($soloPublicadas) {
+            if ($soloPublicadas) {
+                $stmt = $this->mysqli->prepare(
+                    "SELECT * FROM actividades WHERE publicado = 1"
+                );
+            }
+            else {
+                $stmt = $this->mysqli->prepare(
+                    "SELECT * FROM actividades"
+                );
+            }
+            
             $stmt->execute();
             $res = $stmt->get_result();
 
@@ -71,14 +79,15 @@
                     'descripcion' => $row['descripcion'],
                     'material_necesario' => $row['material_necesario'],
                     'informacion_relacionada' => $row['informacion_relacionada'],
-                    'imagen' => $row['imagen']
+                    'imagen' => $row['imagen'],
+                    'publicado' => $row['publicado']
                 );
                 array_push($actividades, $actividad);
             }
 
             return $actividades;
         }
-        public function addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen, $imagenes_contenido) {
+        public function addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen, $imagenes_contenido, $publicado) {
             $stmt = $this->mysqli->prepare(
                 "INSERT INTO actividades (
                         nombre, 
@@ -87,10 +96,11 @@
                         descripcion, 
                         material_necesario,
                         informacion_relacionada,
-                        imagen)
-                VALUES (?, ?, ?, ?, ?, ?, ?)"
+                        imagen,
+                        publicado)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             );
-            $stmt->bind_param("ssissss", $nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen);
+            $stmt->bind_param("ssissssi", $nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagen, $publicado);
             $stmt->execute();
 
             if($stmt->error) {
@@ -146,6 +156,22 @@
             // Borrar actividad
             $stmt = $this->mysqli->prepare(
                 "DELETE FROM actividades WHERE id = ?"
+            );
+            $stmt->bind_param("i", $idAc);
+            $stmt->execute();
+        }
+
+        public function publicarActividad($idAc) {
+            $stmt = $this->mysqli->prepare(
+                "UPDATE actividades SET publicado = 1 WHERE id = ?"
+            );
+            $stmt->bind_param("i", $idAc);
+            $stmt->execute();
+        }
+
+        public function despublicarActividad($idAc) {
+            $stmt = $this->mysqli->prepare(
+                "UPDATE actividades SET publicado = 0 WHERE id = ?"
             );
             $stmt->bind_param("i", $idAc);
             $stmt->execute();

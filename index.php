@@ -9,7 +9,7 @@
   $bd = new Database();
 
   $usuarioData = array();
-  $actividades = $bd->getAllActividades();
+  $actividades = $bd->getAllActividades(true);
 
   if(isset($_SESSION['usuario'])) {
     $usuarioData['loggedIn'] = true;

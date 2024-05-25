@@ -17,6 +17,7 @@
     $descripcion = $_POST['descripcion'];
     $material_necesario = $_POST['material_necesario'];
     $informacion_relacionada = $_POST['informacion_relacionada'];
+    $publicado = isset($_POST['publicado']) ? 1 : 0;
 
     $imagenes = ['imagen_portada', 'imagen_contenido1', 'imagen_contenido2'];
     $uploaded_files = array();
@@ -59,7 +60,7 @@
             str_replace('img/', '', $uploaded_files['imagen_contenido1']),
             str_replace('img/', '', $uploaded_files['imagen_contenido2'])
         );
-        $bd->addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagenes_portada, $imagenes_contenido);
+        $bd->addActividad($nombre, $fecha, $precio, $descripcion, $material_necesario, $informacion_relacionada, $imagenes_portada, $imagenes_contenido, $publicado);
 
         header("Location: administrar_actividades.php");
         exit;
