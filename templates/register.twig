@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrarse</title>
-</head>
-<body>
+{% extends "base_usuario.twig" %}
+
+{% block titulo %}
+    Registrarse
+{% endblock %}
+
+{% block body %}
     <h1>Registrarse</h1>
     <form action="register.php" method="post">
         <label for="nombre">Nombre:</label>
@@ -14,5 +15,4 @@
         <input type="password" id="password" name="password" required>
         <input type="submit" value="Registrarse">
     </form>
-</body>
-</html>
+{% endblock %}

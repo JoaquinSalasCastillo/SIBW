@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar usuario</title>
-</head>
-<body>
+{% extends "base_usuario.twig" %}
+
+{% block titulo %}
+    Editar usuario
+{% endblock %}
+
+{% block body %}
     <h1>Editar Usuario</h1>
     <form method="post" action="editar_usuario.php">
         <label for="nombre">Nombre:</label><br>
@@ -14,5 +15,4 @@
         <input type="email" id="email" name="email" value="{{ usuario.email }}"><br>
         <input type="submit" value="Editar">
     </form>
-</body>
-</html>
+{% endblock %}
