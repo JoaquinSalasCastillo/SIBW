@@ -1,3 +1,43 @@
+{% extends "base_administrar.twig" %}
+
+{% block titulo %}
+    Administrar Actividades
+{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="styles/administrar_actividades_estilo.css">
+{% endblock %}
+
+{% block contenido %}
+<h1>Administrar Actividades</h1>
+
+<a href="anadir_actividad.php"><button type="button">Añadir nueva actividad</button></a>
+
+<div class="actividades">
+    {% for actividad in actividades %}
+        <div class="actividad">
+            <h2>{{ actividad.nombre }}</h2>
+            <p>Fecha: {{ actividad.fecha }}</p>
+            <p>Precio: {{ actividad.precio }}</p>
+            <p>{{ actividad.descripcion }}</p>
+            <p>Material necesario: {{ actividad.material_necesario }}</p>
+            <p>Información relacionada: {{ actividad.informacion_relacionada }}</p>
+            <img src="img/{{ actividad.imagen }}" alt="Actividad: {{ actividad.nombre }}">
+            <div class="acciones">
+                <a href="editar_actividad.php?id={{ actividad.id }}"><button type="button">Editar</button></a>
+                <a href="borrar_actividad.php?id={{ actividad.id }}"><button type="button">Borrar</button></a>
+                {% if actividad.publicado %}
+                    <a href="despublicar_actividad.php?id={{ actividad.id }}"><button type="button">Despublicar</button></a>
+                {% else %}
+                    <a href="publicar_actividad.php?id={{ actividad.id }}"><button type="button">Publicar</button></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{# 
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,4 +89,4 @@
         {% endfor %}
     </div>
 </body>
-</html>
+</html> #}

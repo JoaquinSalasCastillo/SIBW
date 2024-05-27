@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Administrar Comentarios</title>
-    <style>
-        .comentario {
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        .comentario .acciones a {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base_administrar.twig" %}
+
+{% block titulo %}
+    Administrar Comentarios
+{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="styles/administrar_comentarios_estilo.css">
+{% endblock %}
+
+
+{% block contenido %}
     <h1>Administrar Comentarios</h1>
     {% for comentario in comentarios %}
-    <div class="comentario">
-        <h2>Comentario ID: {{ comentario.id }}</h2>
-        <p><strong>Actividad ID:</strong> {{ comentario.actividad_id }}</p>
-        <p><strong>Nombre:</strong> {{ comentario.nombre }}</p>
-        <p><strong>Email:</strong> {{ comentario.email }}</p>
-        <p><strong>Fecha y Hora:</strong> {{ comentario.fecha_hora }}</p>
-        <p><strong>Comentario:</strong> {{ comentario.comentario }}</p>
-        <div class="acciones">
-            <a href="editar_comentario.php?id={{ comentario.id }}">Editar</a>
-            <a href="borrar_comentario.php?id={{ comentario.id }}">Borrar</a>
+        <div class="comentario">
+            <h2>Comentario ID: {{ comentario.id }}</h2>
+            <p><strong>Actividad ID:</strong> {{ comentario.actividad_id }}</p>
+            <p><strong>Nombre:</strong> {{ comentario.nombre }}</p>
+            <p><strong>Email:</strong> {{ comentario.email }}</p>
+            <p><strong>Fecha y Hora:</strong> {{ comentario.fecha_hora }}</p>
+            <p><strong>Comentario:</strong> {{ comentario.comentario }}</p>
+            <div class="acciones">
+                <a href="editar_comentario.php?id={{ comentario.id }}">Editar</a>
+                <a href="borrar_comentario.php?id={{ comentario.id }}">Borrar</a>
+            </div>
         </div>
-    </div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

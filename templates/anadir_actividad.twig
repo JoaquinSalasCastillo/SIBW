@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Añadir Actividad</title>
-</head>
-<body>
+{% extends "base_formulario_actividad.twig" %}
+
+{% block titulo %}
+    Añadir Actividad
+{% endblock %}
+
+{% block contenido %}
     <form action="anadir_actividad.php" method="post" enctype="multipart/form-data">
         <div>
             <label for="nombre">Nombre:</label>
@@ -57,5 +58,4 @@
 
         <input type="submit" value="Añadir actividad">
     </form>
-</body>
-</html>
+{% endblock %}
