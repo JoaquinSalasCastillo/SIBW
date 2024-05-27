@@ -1,0 +1,29 @@
+#busqueda {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#resultados {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#resultados div {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#resultados div:last-child {
+    border-bottom: none;
+}
+
+#resultados div:hover {
+    background-color: #f0f0f0;
+}
