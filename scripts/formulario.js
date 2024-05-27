@@ -19,6 +19,7 @@ formulario.addEventListener('submit', (evento) => {
     let nombre = document.getElementById('nombre').value;
     let email = document.getElementById('email').value;
     let comentario = document.getElementById('comentario').value;
+    let actividadId = document.getElementById('actividad-id').value;
 
     // Validar que todos los campos han sido rellenados
     if (!nombre || !email || !comentario) {
@@ -33,23 +34,42 @@ formulario.addEventListener('submit', (evento) => {
         return;
     }
 
-    // Obtener la fecha y hora actual
-    let fecha = new Date();
-    let minutos = fecha.getMinutes().toString().padStart(2, '0');
-    let fechaYHora = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()} ${fecha.getHours()}:${minutos}`;
-    
-    // Crear nuevo elemento de comentario
-    let nuevoComentario = document.createElement('div');
-    nuevoComentario.classList.add('comentario');
-    nuevoComentario.innerHTML = `
-        <h4>${nombre}</h4>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Fecha y hora:</strong> ${fechaYHora}</p>
-        <p>${comentario}</p>
-    `;
+    // Objeto FormData para enviar los datos del formulario
+    let datos = new FormData();
+    datos.append('nombre', nombre);
+    datos.append('email', email);
+    datos.append('comentario', comentario);
 
-    // Agregar el comentario a la seccion de comentarios
-    document.getElementById('comentarios-subidos').appendChild(nuevoComentario);
+    // Hacer solicitud AJAX
+    fetch(`actividad.php?id=${actividadId}`, {
+        method: 'POST',
+        body: datos
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // // Obtener la fecha y hora actual
+    // let fecha = new Date();
+    // let minutos = fecha.getMinutes().toString().padStart(2, '0');
+    // let fechaYHora = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()} ${fecha.getHours()}:${minutos}`;
+    
+    // // Crear nuevo elemento de comentario
+    // let nuevoComentario = document.createElement('div');
+    // nuevoComentario.classList.add('comentario');
+    // nuevoComentario.innerHTML = `
+    //     <h4>${nombre}</h4>
+    //     <p><strong>Email:</strong> ${email}</p>
+    //     <p><strong>Fecha y hora:</strong> ${fechaYHora}</p>
+    //     <p>${comentario}</p>
+    // `;
+
+    // // Agregar el comentario a la seccion de comentarios
+    // document.getElementById('comentarios-subidos').appendChild(nuevoComentario);
 
     // Limpiar los campos del formulario
     document.getElementById('nombre').value = '';

@@ -15,6 +15,14 @@
 
   $bd = new Database();
 
+  if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre = $_POST['nombre'];
+    $email = $_POST['email'];
+    $comentario = $_POST['comentario'];
+
+    $bd->addComentario($idAc, $nombre, $email, $comentario);
+  }
+
   $actividad = $bd->getActividad($idAc, true);
   $imagenes = $bd->getImagenes($idAc);
   $comentarios = $bd->getComentarios($idAc);

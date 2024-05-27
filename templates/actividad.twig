@@ -82,25 +82,35 @@ Actividad
         </div>
 
         <!-- Formulario para añadir comentarios -->
-        <form id="formulario-comentarios">
+        <form id="formulario-comentarios" method="POST" action="actividad.php?id={{ actividad.id }}">
+            <input type="hidden" id="actividad-id" name="actividad-id" value="{{ actividad.id }}">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" class="form-control">
+                <input type="text" id="nombre" name="nombre" class="form-control">
             </div>
         
             <div class="form-group">
                 <label for="email" class="form-label">E-mail</label>
-                <input type="email" id="email" class="form-control" placeholder="name@example.com">
+                <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com">
             </div>
         
             <label for="comentario" class="form-label">Comentario</label>
-            <textarea id="comentario" class="form-control"></textarea>
+            <textarea id="comentario" name="comentario" class="form-control"></textarea>
         
             <input type="submit" value="Enviar" class="btn btn-success">
         </form>
     </div>
     <!-- Boton para hacer aparecer la seccion de comentarios -->
-    <button type="button" id="boton-comentarios" class="btn btn-primary">Comentarios</button>
+    {% if usuarioData['loggedIn'] %}
+        {% if usuarioData['rol'] == 'superusuario' or usuarioData['rol'] == 'gestor' %}
+            <a href="editar_actividad.php?id={{ actividad.id }}" id="boton-editar" >
+                <button class="btn btn-primary">Editar Actividad</button>
+            </a>
+        {% endif %}
+        
+        <button type="button" id="boton-comentarios" class="btn btn-primary">Comentarios</button>
+    {% endif %}
+    
 {% endblock %}
 
 {% block scripts %}

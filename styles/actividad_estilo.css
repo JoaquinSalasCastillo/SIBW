@@ -119,6 +119,13 @@ footer{
     z-index: 1001;
 }
 
+#boton-editar{
+    position: fixed;
+    right: 1%;
+    bottom: 7%; 
+    z-index: 1001;
+}
+
 /*** ESTILOS GENERALES ***/
 .caja {
     border: 3px solid black;

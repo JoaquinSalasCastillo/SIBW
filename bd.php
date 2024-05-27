@@ -470,6 +470,16 @@
             $stmt->bind_param("i", $idComentario);
             $stmt->execute();
         }
+        public function addComentario($actividad_id, $nombre, $email, $comentario) {
+            $fecha_hora = date("Y-m-d H:i:s"); // Fecha y hora actual
+
+            $stmt = $this->mysqli->prepare(
+                "INSERT INTO comentarios (actividad_id, nombre, email, fecha_hora, comentario) VALUES (?, ?, ?, ?, ?)"
+            );
+            $stmt->bind_param("issss", $actividad_id, $nombre, $email, $fecha_hora, $comentario);
+            $stmt->execute();
+            $stmt->close();
+        }
 
         public function getPalabrasProhibidas() {            
             // Preparar la sentencia
