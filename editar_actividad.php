@@ -11,7 +11,7 @@
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
-    $actividad = $bd->getActividad($id);
+    $actividad = $bd->getActividad($id, false);
 
     $actividad['nombre'] = $_POST['nombre'];
     $actividad['fecha'] = $_POST['fecha'];
@@ -27,7 +27,7 @@
   }
   else {
     $id = $_GET['id'];
-    $actividad = $bd->getActividad($id);
+    $actividad = $bd->getActividad($id, false);
   
     echo $twig->render(
       'editar_actividad.twig', 

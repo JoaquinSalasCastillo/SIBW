@@ -14,7 +14,7 @@
 
   $bd = new Database();
 
-  $actividad = $bd->getActividad($idAc);
+  $actividad = $bd->getActividad($idAc, true);
   
   echo $twig->render('actividad_imprimir.twig', ['actividad' => $actividad]);
 

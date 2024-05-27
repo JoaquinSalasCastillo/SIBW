@@ -10,19 +10,37 @@
         }
 
         /******************** ACTIVIDADES **********************/
-        public function getActividad($idAc) {            
+        public function getActividad($idAc, $soloPublicadas) {            
             // Preparar la sentencia
-            $stmt = $this->mysqli->prepare(
-                "SELECT nombre, 
-                        fecha, 
-                        precio, 
-                        descripcion, 
-                        material_necesario, 
-                        informacion_relacionada, 
-                        imagen
-                FROM actividades 
-                WHERE id = ? AND publicado = 1"
-            );
+            if($soloPublicadas) {
+                $stmt = $this->mysqli->prepare(
+                    "SELECT id,
+                            nombre, 
+                            fecha, 
+                            precio, 
+                            descripcion, 
+                            material_necesario, 
+                            informacion_relacionada, 
+                            imagen
+                    FROM actividades 
+                    WHERE id = ? AND publicado = 1"
+                );
+            }
+            else {
+                $stmt = $this->mysqli->prepare(
+                    "SELECT id,
+                            nombre, 
+                            fecha, 
+                            precio, 
+                            descripcion, 
+                            material_necesario, 
+                            informacion_relacionada, 
+                            imagen
+                    FROM actividades 
+                    WHERE id = ?"
+                );
+            }
+            
             // Vincular los parametros
             $stmt->bind_param("i", $idAc);
             // Ejecutar la sentencia
@@ -31,6 +49,7 @@
             $res = $stmt->get_result();
     
             $actividad = array(
+                'id' => 'XXXX',
                 'nombre' => 'XXXX', 
                 'fecha' => 'YYYY', 
                 'precio' => 'ZZZZ',
@@ -42,6 +61,7 @@
             if($res->num_rows > 0) {
                 $row = $res->fetch_assoc();
                 $actividad = array(
+                    'id' => $row['id'],
                     'nombre' => $row['nombre'], 
                     'fecha' => $row['fecha'], 
                     'precio' => $row['precio'],
@@ -137,9 +157,6 @@
                 $actividad['id']
             );
             $stmt->execute();
-            if(!$stmt->execute()) {
-                echo "Error al actualizar actividad: " . $stmt->error;
-            }
         }
         public function deleteActividad($idAc) {
             // Borrar imagenes asociadas a la actividad

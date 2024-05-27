@@ -15,7 +15,7 @@
 
   $bd = new Database();
 
-  $actividad = $bd->getActividad($idAc);
+  $actividad = $bd->getActividad($idAc, true);
   $imagenes = $bd->getImagenes($idAc);
   $comentarios = $bd->getComentarios($idAc);
   $palabrasProhibidas = $bd->getPalabrasProhibidas();
@@ -25,6 +25,10 @@
   if(isset($_SESSION['usuario'])) {
     $usuarioData['loggedIn'] = true;
     $usuarioData['usuario'] = $_SESSION['usuario'];
+    $usuarioData['rol'] = $_SESSION['usuario']['rol'];
+    if($usuarioData['rol'] === 'gestor') {
+      $actividad = $bd->getActividad($idAc, false);
+    }
   } else {
     $usuarioData['loggedIn'] = false;
   }
