@@ -8,14 +8,18 @@
 
   $bd = new Database();
 
-  $actividades = $bd->getAllActividades(false);
-  $imagenes = $bd->getAllImagenes();
+  if(isset($_GET['busqueda']) && $_GET['busqueda'] !== ''){
+    $actividades = $bd->buscarActividadesPorNombreDescripcion($_GET['busqueda']);
+  }
+  else {
+    $actividades = $bd->getAllActividades(false);
+  }
+
 
   echo $twig->render(
     'administrar_actividades.twig', 
     [
       'actividades' => $actividades,
-      'imagenes' => $imagenes
     ]
   );
 ?>

@@ -197,6 +197,17 @@
             $stmt->execute();
         }
 
+        public function buscarActividadesPorNombreDescripcion($query) {
+            $stmt = $this->mysqli->prepare(
+                "SELECT * FROM actividades WHERE nombre LIKE ? OR descripcion LIKE ?"
+            );
+            $searchTerm = "%" . $query . "%";
+            $stmt->bind_param("ss", $searchTerm, $searchTerm);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            return $res->fetch_all(MYSQLI_ASSOC);
+        }
+
         public function buscarActividades($query, $esGestor = false) {
             $sql = "SELECT id, nombre FROM actividades WHERE nombre LIKE ?";
             if (!$esGestor) {

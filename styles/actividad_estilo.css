@@ -119,6 +119,13 @@ footer{
     z-index: 1001;
 }
 
+#boton-borrar{
+    position: fixed;
+    right: 1%;
+    bottom: 13%;
+    z-index: 1001;
+}
+
 #boton-editar{
     position: fixed;
     right: 1%;

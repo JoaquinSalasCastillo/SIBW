@@ -103,8 +103,11 @@ Actividad
     <!-- Boton para hacer aparecer la seccion de comentarios -->
     {% if usuarioData['loggedIn'] %}
         {% if usuarioData['rol'] == 'superusuario' or usuarioData['rol'] == 'gestor' %}
+            <a href="borrar_actividad.php?id={{ actividad.id }}" id="boton-borrar" >
+                <button class="btn btn-danger">Borrar Actividad</button>
+            </a>
             <a href="editar_actividad.php?id={{ actividad.id }}" id="boton-editar" >
-                <button class="btn btn-primary">Editar Actividad</button>
+                <button class="btn btn-secondary">Editar Actividad</button>
             </a>
         {% endif %}
         
