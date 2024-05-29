@@ -52,25 +52,7 @@ formulario.addEventListener('submit', (evento) => {
     .catch(error => {
         console.error('Error:', error);
     });
-
-    // // Obtener la fecha y hora actual
-    // let fecha = new Date();
-    // let minutos = fecha.getMinutes().toString().padStart(2, '0');
-    // let fechaYHora = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()} ${fecha.getHours()}:${minutos}`;
     
-    // // Crear nuevo elemento de comentario
-    // let nuevoComentario = document.createElement('div');
-    // nuevoComentario.classList.add('comentario');
-    // nuevoComentario.innerHTML = `
-    //     <h4>${nombre}</h4>
-    //     <p><strong>Email:</strong> ${email}</p>
-    //     <p><strong>Fecha y hora:</strong> ${fechaYHora}</p>
-    //     <p>${comentario}</p>
-    // `;
-
-    // // Agregar el comentario a la seccion de comentarios
-    // document.getElementById('comentarios-subidos').appendChild(nuevoComentario);
-
     // Limpiar los campos del formulario
     document.getElementById('nombre').value = '';
     document.getElementById('email').value = '';
