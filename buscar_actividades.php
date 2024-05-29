@@ -8,7 +8,8 @@
   if (isset($_GET['q'])) {
     $query = $_GET['q'];
 
-    $esGestor = isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] == 'gestor';
+    $esGestor = isset($_SESSION['usuario']) && 
+                ($_SESSION['usuario']['rol'] == 'gestor' || $_SESSION['usuario']['rol'] == 'superusuario');
 
     $actividades = $bd->buscarActividades($query, $esGestor);
 
